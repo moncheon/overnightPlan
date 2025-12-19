@@ -1,0 +1,16 @@
+{
+  "name": "claude-nights-watch-marketplace",
+  "description": "Official marketplace for Claude Nights Watch plugin",
+  "owner": {
+    "name": "Aniket Karne",
+    "email": "[email protected]",
+    "url": "https://github.com/aniketkarne/ClaudeNightsWatch"
+  },
+  "plugins": [
+    {
+      "name": "claude-nights-watch",
+      "source": "./",
+      "description": "Autonomous task execution daemon for Claude CLI"
+    }
+  ]
+}

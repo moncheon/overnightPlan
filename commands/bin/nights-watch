@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Claude Nights Watch CLI - Plugin Command Wrapper
+# This script routes all /nights-watch commands to the appropriate handlers
+
+PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+MANAGER_SCRIPT="$PLUGIN_ROOT/claude-nights-watch-manager.sh"
+SETUP_SCRIPT="$PLUGIN_ROOT/setup-nights-watch.sh"
+
+# Export plugin root for child processes
+export CLAUDE_NIGHTS_WATCH_DIR="${CLAUDE_NIGHTS_WATCH_DIR:-$(pwd)}"
+
+# Parse command
+COMMAND="${1:-help}"
+shift
+
+case "$COMMAND" in
+    start)
+        "$MANAGER_SCRIPT" start "$@"
+        ;;
+    stop)
+        "$MANAGER_SCRIPT" stop "$@"
+        ;;
+    restart)
+        "$MANAGER_SCRIPT" restart "$@"
+        ;;
+    status)
+        "$MANAGER_SCRIPT" status "$@"
+        ;;
+    logs)
+        "$MANAGER_SCRIPT" logs "$@"
+        ;;
+    task)
+        "$MANAGER_SCRIPT" task "$@"
+        ;;
+    setup)
+        "$SETUP_SCRIPT" "$@"
+        ;;
+    help|--help|-h)
+        cat << 'EOF'
+Claude Nights Watch - Autonomous Task Execution Daemon
+
+Usage: /nights-watch <command> [options]
+
+Commands:
+  start [--at TIME]   Start the daemon
+  stop                Stop the daemon
+  restart             Restart the daemon
+  status              Show daemon status
+  logs [-f]           View logs (use -f to follow)
+  task                View current task and rules
+  setup               Run interactive setup wizard
+  help                Show this help message
+
+Examples:
+  /nights-watch start              Start daemon immediately
+  /nights-watch start --at "09:00" Start at 9 AM
+  /nights-watch status             Check daemon status
+  /nights-watch logs -f            Follow logs in real-time
+
+Documentation:
+  Plugin Root: $PLUGIN_ROOT
+  Examples: $PLUGIN_ROOT/examples/
+  
+For more information, see: https://github.com/aniketkarne/ClaudeNightsWatch
+EOF
+        ;;
+    *)
+        echo "Unknown command: $COMMAND"
+        echo "Use '/nights-watch help' for usage information"
+        exit 1
+        ;;
+esac
+
