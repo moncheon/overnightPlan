@@ -1,0 +1,15 @@
+{
+  "name": "work-directive-marketplace",
+  "description": "Work Directive plugin for session-aware task planning and execution",
+  "owner": {
+    "name": "Work Directive Team",
+    "url": "https://github.com/work-directive/work-directive"
+  },
+  "plugins": [
+    {
+      "name": "work-directive",
+      "source": "./",
+      "description": "Session-aware task planning with automatic resume capability"
+    }
+  ]
+}
