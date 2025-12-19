@@ -1,0 +1,146 @@
+{
+  "id": "wd-20250119-a7f3e2",
+  "title": "Implement User Authentication System",
+  "description": "Build a complete JWT-based authentication system with login, logout, password reset, and comprehensive test coverage.",
+  "created_at": "2025-01-19T10:00:00Z",
+  "updated_at": "2025-01-19T12:30:00Z",
+  "status": "in_progress",
+  "total_steps": 8,
+  "current_step": 4,
+  "steps": [
+    {
+      "id": 1,
+      "title": "Research existing authentication patterns",
+      "description": "Analyze the current codebase for existing auth patterns, middleware, and security practices",
+      "status": "completed",
+      "started_at": "2025-01-19T10:00:00Z",
+      "completed_at": "2025-01-19T10:20:00Z",
+      "dependencies": [],
+      "artifacts": [],
+      "output_summary": "Found Express.js with passport.js setup. Using bcrypt for password hashing. JWT library already in dependencies.",
+      "notes": "Existing session middleware should be removed when switching to JWT"
+    },
+    {
+      "id": 2,
+      "title": "Design JWT implementation approach",
+      "description": "Create technical design document for JWT auth flow, token structure, and refresh strategy",
+      "status": "completed",
+      "started_at": "2025-01-19T10:20:00Z",
+      "completed_at": "2025-01-19T10:45:00Z",
+      "dependencies": [1],
+      "artifacts": ["docs/auth-design.md"],
+      "output_summary": "Designed stateless JWT with 15min access tokens, 7-day refresh tokens. Blacklist for logout.",
+      "notes": null
+    },
+    {
+      "id": 3,
+      "title": "Implement login endpoint",
+      "description": "Create POST /auth/login endpoint with email/password validation and JWT generation",
+      "status": "completed",
+      "started_at": "2025-01-19T10:45:00Z",
+      "completed_at": "2025-01-19T11:30:00Z",
+      "dependencies": [2],
+      "artifacts": ["src/routes/auth.ts", "src/services/authService.ts"],
+      "output_summary": "Login endpoint complete with rate limiting and proper error handling.",
+      "notes": null
+    },
+    {
+      "id": 4,
+      "title": "Implement logout endpoint",
+      "description": "Create POST /auth/logout endpoint with token blacklisting",
+      "status": "in_progress",
+      "started_at": "2025-01-19T11:30:00Z",
+      "completed_at": null,
+      "dependencies": [3],
+      "artifacts": ["src/services/tokenBlacklist.ts"],
+      "output_summary": null,
+      "notes": "Session ended mid-implementation. Redis blacklist created, endpoint routing pending."
+    },
+    {
+      "id": 5,
+      "title": "Implement password reset flow",
+      "description": "Create forgot-password and reset-password endpoints with email verification",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "dependencies": [3],
+      "artifacts": [],
+      "output_summary": null,
+      "notes": null
+    },
+    {
+      "id": 6,
+      "title": "Write unit tests",
+      "description": "Create unit tests for auth service, token generation, and validation",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "dependencies": [4, 5],
+      "artifacts": [],
+      "output_summary": null,
+      "notes": null
+    },
+    {
+      "id": 7,
+      "title": "Write integration tests",
+      "description": "Create integration tests for all auth endpoints",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "dependencies": [6],
+      "artifacts": [],
+      "output_summary": null,
+      "notes": null
+    },
+    {
+      "id": 8,
+      "title": "Update API documentation",
+      "description": "Add auth endpoints to OpenAPI spec and update README",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "dependencies": [7],
+      "artifacts": [],
+      "output_summary": null,
+      "notes": null
+    }
+  ],
+  "context": {
+    "working_directory": "/home/user/myproject",
+    "key_files": [
+      "src/routes/auth.ts",
+      "src/services/authService.ts",
+      "src/middleware/authMiddleware.ts",
+      "docs/auth-design.md"
+    ],
+    "environment": "Node.js 18, Express.js 4.18, TypeScript 5.0",
+    "user_preferences": "Prefer functional style, comprehensive error handling"
+  },
+  "constraints": [
+    "Do not modify existing user endpoints",
+    "Maintain backward compatibility with existing sessions",
+    "Use existing Redis instance for token blacklist",
+    "Follow existing code style and linting rules"
+  ],
+  "session_history": [
+    {
+      "session_id": "session-20250119-1",
+      "started_at": "2025-01-19T10:00:00Z",
+      "ended_at": "2025-01-19T11:45:00Z",
+      "steps_completed": [1, 2, 3],
+      "notes": "Good progress. Login working. Starting logout implementation."
+    },
+    {
+      "session_id": "session-20250119-2",
+      "started_at": "2025-01-19T12:00:00Z",
+      "ended_at": "2025-01-19T12:30:00Z",
+      "steps_completed": [],
+      "notes": "Session interrupted during step 4. Token blacklist service created."
+    }
+  ],
+  "resume_context": {
+    "last_action": "Created tokenBlacklist.ts service with Redis integration",
+    "next_action": "Add logout route handler in auth.ts and connect to blacklist service",
+    "critical_state": "tokenBlacklist.ts is complete but not yet imported in auth routes"
+  }
+}

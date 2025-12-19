@@ -17,6 +17,6 @@
     "autonomous"
   ],
   "commands": "./commands/",
-  "agents": "./agents/",
+  "agents": ["./agents/directive-planner.md"],
   "hooks": "./hooks/hooks.json"
 }
